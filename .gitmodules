@@ -1,0 +1,6 @@
+[submodule "GribTripBackend"]
+	path = GribTripBackend
+	url = https://github.com/Z3f1rka/GribTripBackend
+[submodule "GribTripFrontend"]
+	path = GribTripFrontend
+	url = https://github.com/Z3f1rka/GribTripFrontend
