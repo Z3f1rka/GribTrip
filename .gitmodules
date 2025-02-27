@@ -4,3 +4,6 @@
 [submodule "GribTripFrontend"]
 	path = GribTripFrontend
 	url = https://github.com/Z3f1rka/GribTripFrontend
+[submodule "GripTripPhotos"]
+	path = GripTripPhotos
+	url = https://github.com/Z3f1rka/GripTripPhotos
