@@ -1,5 +1,5 @@
 # GribTrip
-Запуск проекта в dev режиме:
+## Запуск проекта в dev режиме:
 Чтобы запустить проект вам понадобится сервер базы данных PostgreSQL
 
 ### Подготовка бекенд части
@@ -110,3 +110,62 @@ npm install
 npm run dev
 ```
 
+## Запуск проекта в docker
+Создайте и заполните конфигурационные файлы приложений:
+*(у бекенда должен быть такой же файл, как в общей папке)*
+```shell
+cp .env.template .env
+```
+```shell
+cp .env ./GribTripBackend/.env
+```
+Создание конфигурационного файла для фронтенда
+```shell
+cp ./GribTripFrontend/.env.template ./GribTripFrontend/.env
+```
+Создание конфигурационного файла для сервера с фотографиями
+```shell
+cp ./GribTripPhotos/.env.template ./GribTripPhotos/.env
+```
+
+Запустите сервер с базой данных:
+```shell
+docker-compose up -d db
+```
+
+Перейдите в директорию с backend частью приложения и выполните миграцию:
+```shell
+cd GribTripBackend
+```
+```shell
+python -m venv .venv
+```
+
+```shell
+source .venv/Scripts/activate
+```
+
+```shell
+pip install -r requirements/dev.txt
+```
+
+```shell
+mkdir alembic/versions
+```
+```shell
+alembic revision --autogenerate
+```
+```shell
+alembic upgrade head
+```
+*для корректной работы клиентской части заполните .env файл*
+- VITE_API_URL: адрес основного backend сервера (http://localhost/api/)
+- HOST: хост frontend сервера (0.0.0.0)
+- PORT: порт frontend сервера (по умолчанию 5173)
+- VITE_GRAPHHOPPER_API_KEY: ключ от сервиса graphhopper
+- VITE_FILES_API_URL: адрес сервера с фотографиями (по умолчанию http://localhost/photo/)
+
+Запустите все остальные сервера:
+```shell
+docker-compose up -d
+```
